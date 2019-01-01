@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace CursLab8.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    //[Authorize(Roles = "Administrator,User")]
     public class CategoriesController : Controller
     {
 

@@ -283,6 +283,7 @@
     <Content Include="Views\Categories\Show.cshtml" />
     <Content Include="Views\Shared\ArticleInfo.cshtml" />
     <Content Include="Views\Shared\ShowPartial.cshtml" />
+    <Content Include="Views\Article\ArticlesByCategory.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
