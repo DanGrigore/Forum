@@ -43,11 +43,13 @@ namespace CursLab8.Controllers
         //[Authorize(Roles = "User,Editor,Administrator")]
         public ActionResult Show(int id)
         {
+            var messages = db.Messages.Include("Article").Include("User").Where(item => item.ArticleId == id);
             Article article = db.Articles.Find(id);
             ViewBag.Article = article;
             ViewBag.Category = article.Category;
+            ViewBag.Messages = messages;
             ViewBag.afisareButoane = false;
-            if (User.IsInRole("Editor") || User.IsInRole("Administrator"))
+            if (User.IsInRole("Moderator") || User.IsInRole("Administrator"))
             {
                 ViewBag.afisareButoane = true;
             }

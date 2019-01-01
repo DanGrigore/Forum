@@ -3,8 +3,6 @@
 @{
     ViewBag.Titlu = "Editare Articol";
 }
-
-<h2>@ViewBag.Titlu</h2>
 <form method="post" action="/Article/Edit/@Model.Id">
     @Html.HttpMethodOverride(HttpVerbs.Put)
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })

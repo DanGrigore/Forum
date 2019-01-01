@@ -30,7 +30,10 @@ namespace CursLab8.Models
         // Se aduaga acest atribut pentru a putea prelua toate categoriile unui model in helper
         public IEnumerable<SelectListItem> Categories { get; set; }
 
+        public virtual ICollection<Message> Messages { get; set; }
+
+
     }
 
-    
+
 }

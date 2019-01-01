@@ -1,0 +1,17 @@
+﻿<div class="panel panel-default">
+    <div class="panel-body">
+        <span class="label label-success">@Model.Date</span>
+        <i class="glyphicon glyphicon-user"></i> <i>comment facut de</i> <strong>
+            @Model.User.UserName
+        </strong>
+        <br />
+        <i class="glyphicon glyphicon-globe"></i> @Model.Comment
+        <br />
+        <a class="btn btn-sm btn-success" href="/Message/Edit/@Model.Id">Editare comentariu</a>
+        <form method="post" action="/Message/Delete/@Model.Id">
+            @Html.HttpMethodOverride(HttpVerbs.Delete)
+            <button class="btn btn-sm btn-danger" type="submit">Sterge comentariu</button>
+        </form>
+    </div>
+</div>
+<br />
