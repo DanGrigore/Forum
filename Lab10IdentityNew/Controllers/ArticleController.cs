@@ -10,7 +10,6 @@ using System.Web.Mvc;
 
 namespace CursLab8.Controllers
 {
-    [Authorize]
     public class ArticleController : Controller
     {
         private ApplicationDbContext db = ApplicationDbContext.Create();
