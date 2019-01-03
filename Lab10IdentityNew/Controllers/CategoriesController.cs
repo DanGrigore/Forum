@@ -8,13 +8,13 @@ using System.Web.Mvc;
 
 namespace CursLab8.Controllers
 {
-    [Authorize(Roles = "Administrator,User")]
+    [Authorize(Roles = "Administrator")]
     public class CategoriesController : Controller
     {
 
         private ApplicationDbContext db = ApplicationDbContext.Create();
 
-        [Authorize(Roles = "Administrator,User")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
             var categories = from category in db.Categories
@@ -30,7 +30,7 @@ namespace CursLab8.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Administrator,User")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Show(int id)
         {
             Category category = db.Categories.Find(id);
@@ -62,7 +62,7 @@ namespace CursLab8.Controllers
             }
         }
 
-        [Authorize(Roles = "Administrator,User")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int id)
         {
             Category category = db.Categories.Find(id);

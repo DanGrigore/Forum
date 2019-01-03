@@ -74,7 +74,7 @@ namespace Lab10IdentityNew.Controllers
 
 
         [HttpPut]
-        [Authorize(Roles = "Editor,Administrator")]
+        [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult Edit(int id, Message requestMessage)
         {
             try
@@ -119,7 +119,7 @@ namespace Lab10IdentityNew.Controllers
         }
 
         [HttpDelete]
-        [Authorize(Roles = "Editor,Administrator")]
+        [Authorize(Roles = "Moderator,Administrator")]
         public ActionResult Delete(int id)
         {
 

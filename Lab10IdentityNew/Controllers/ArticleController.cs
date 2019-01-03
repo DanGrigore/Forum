@@ -15,7 +15,7 @@ namespace CursLab8.Controllers
     {
         private ApplicationDbContext db = ApplicationDbContext.Create();
 
-        [Authorize(Roles = "User,Editor,Administrator")]
+        [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult Index()
         {
             var articles = db.Articles.Include("Category").Include("User");
@@ -40,7 +40,7 @@ namespace CursLab8.Controllers
             return View();
         }
 
-        [Authorize(Roles = "User,Editor,Administrator")]
+        [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult Show(int id)
         {
             var messages = db.Messages.Include("Article").Include("User").Where(item => item.ArticleId == id);
@@ -59,7 +59,7 @@ namespace CursLab8.Controllers
 
         }
 
-        [Authorize(Roles = "Editor,Administrator")]
+        [Authorize(Roles = "Moderator,Administrator")]
         public ActionResult New()
         {
             Article article = new Article();
@@ -93,7 +93,7 @@ namespace CursLab8.Controllers
 
 
         [HttpPost]
-        [Authorize(Roles = "Editor,Administrator")]
+        [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult New(Article article)
         {
             article.Categories = GetAllCategories();
@@ -117,7 +117,7 @@ namespace CursLab8.Controllers
             }
         }
 
-        [Authorize(Roles = "Editor,Administrator")]
+        [Authorize(Roles = "User,Administrator")]
         public ActionResult Edit(int id)
         {
 
@@ -138,7 +138,7 @@ namespace CursLab8.Controllers
 
 
         [HttpPut]
-        [Authorize(Roles = "Editor,Administrator")]
+        [Authorize(Roles = "User,Administrator")]
         public ActionResult Edit(int id, Article requestArticle)
         {
             try
@@ -181,7 +181,7 @@ namespace CursLab8.Controllers
         }
 
         [HttpDelete]
-        [Authorize(Roles = "Editor,Administrator")]
+        [Authorize(Roles = "User,Administrator")]
         public ActionResult Delete(int id)
         {
 
