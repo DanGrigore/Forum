@@ -61,7 +61,8 @@ namespace Lab10IdentityNew.Controllers
             Message message = db.Messages.Find(id);
             ViewBag.Message = message;
 
-            if (message.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator"))
+            if (message.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator")
+                || User.IsInRole("Moderator"))
             {
                 return View(message);
             }
@@ -74,7 +75,7 @@ namespace Lab10IdentityNew.Controllers
 
 
         [HttpPut]
-        // [Authorize(Roles = "Editor,Administrator")]
+        [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult Edit(int id, Message requestMessage)
         {
             try
@@ -83,7 +84,8 @@ namespace Lab10IdentityNew.Controllers
                 {
                     Message message = db.Messages.Find(id);
 
-                    if (message.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator"))
+                    if (message.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator")
+                        || User.IsInRole("Moderator"))
                     {
                         if (TryUpdateModel(message))
                         {
@@ -119,13 +121,14 @@ namespace Lab10IdentityNew.Controllers
         }
 
         [HttpDelete]
-        // [Authorize(Roles = "Editor,Administrator")]
+        [Authorize(Roles = "Moderator,Administrator")]
         public ActionResult Delete(int id)
         {
 
             Message message = db.Messages.Find(id);
 
-            if (message.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator"))
+            if (message.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator")
+                || User.IsInRole("Moderator"))
             {
                 db.Messages.Remove(message);
                 db.SaveChanges();
