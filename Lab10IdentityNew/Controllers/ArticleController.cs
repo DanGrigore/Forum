@@ -39,8 +39,7 @@ namespace CursLab8.Controllers
 
             return View();
         }
-
-        [Authorize(Roles = "User,Moderator,Administrator")]
+        
         public ActionResult Show(int id)
         {
             var messages = db.Messages.Include("Article").Include("User").Where(item => item.ArticleId == id);
