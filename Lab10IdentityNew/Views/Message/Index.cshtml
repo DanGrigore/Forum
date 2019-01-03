@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Show";
+}
+
+<h2>@ViewBag.Titlu</h2>
+
+@if (TempData.ContainsKey("message"))
+{
+    <h3 class="alert alert-info" role="alert">@ViewBag.message</h3>
+}
+
+@foreach (Lab10IdentityNew.Models.Message message in ViewBag.Messages)
+{
+    @Html.Partial("CommentInfo", message);
+}
+
+<a class="btn btn-sm btn-success" href="/Message/New">Lasa un comentariu</a>
+<br />
+

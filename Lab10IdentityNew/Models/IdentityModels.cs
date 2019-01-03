@@ -30,6 +30,7 @@ namespace Lab10IdentityNew.Models
 
         public DbSet<Article> Articles { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         public static ApplicationDbContext Create()
         {

@@ -10,6 +10,14 @@
 
 @Html.Partial("ShowPartial")
 
+@foreach (Lab10IdentityNew.Models.Message message in ViewBag.Messages)
+{
+    @Html.Partial("CommentInfo", message);
+}
+<a class="btn btn-sm btn-info" href="/Message/New/@Model.Id">
+    Adauga comentariu
+</a>
+
 @if (ViewBag.afisareButoane == true && Model.UserId == ViewBag.utilizatorCurent || ViewBag.esteAdmin)
 {
     <a class="btn btn-sm btn-info" href="/Article/Edit/@Model.Id">
