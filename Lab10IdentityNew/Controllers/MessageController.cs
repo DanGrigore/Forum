@@ -61,7 +61,8 @@ namespace Lab10IdentityNew.Controllers
             Message message = db.Messages.Find(id);
             ViewBag.Message = message;
 
-            if (message.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator"))
+            if (message.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator")
+                || User.IsInRole("Moderator"))
             {
                 return View(message);
             }
@@ -83,7 +84,8 @@ namespace Lab10IdentityNew.Controllers
                 {
                     Message message = db.Messages.Find(id);
 
-                    if (message.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator"))
+                    if (message.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator")
+                        || User.IsInRole("Moderator"))
                     {
                         if (TryUpdateModel(message))
                         {
@@ -125,7 +127,8 @@ namespace Lab10IdentityNew.Controllers
 
             Message message = db.Messages.Find(id);
 
-            if (message.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator"))
+            if (message.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator")
+                || User.IsInRole("Moderator"))
             {
                 db.Messages.Remove(message);
                 db.SaveChanges();
