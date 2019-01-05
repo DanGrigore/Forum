@@ -71,10 +71,15 @@ namespace CursLab8.Controllers
             ViewBag.Article = article;
             ViewBag.Category = article.Category;
             ViewBag.Messages = messages;
-            ViewBag.afisareButoane = false;
+            ViewBag.afisareButoane1 = false;
+            ViewBag.afisareButoane2 = false;
+            if (User.IsInRole("Moderator") || User.IsInRole("Administrator") || article.UserId == User.Identity.GetUserId())
+            {
+                ViewBag.afisareButoane1 = true;
+            }
             if (User.IsInRole("Moderator") || User.IsInRole("Administrator"))
             {
-                ViewBag.afisareButoane = true;
+                ViewBag.afisareButoane2 = true;
             }
             ViewBag.esteAdmin = User.IsInRole("Administrator");
             ViewBag.utilizatorCurent = User.Identity.GetUserId();

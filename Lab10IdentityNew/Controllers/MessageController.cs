@@ -26,6 +26,7 @@ namespace Lab10IdentityNew.Controllers
  
         }
 
+        [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult New(int id)
         {
             Message message = new Message();
