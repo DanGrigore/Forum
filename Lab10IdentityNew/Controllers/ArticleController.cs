@@ -27,7 +27,7 @@ namespace CursLab8.Controllers
             return View();
         }
 
-        public ActionResult ArticlesByCategory(int id, int offset = 0, int pageSize = 10)
+        public ActionResult ArticlesByCategory(int id, int offset, int pageSize)
         {
             var articles = db.Articles
                 .Include("Category")
@@ -35,13 +35,17 @@ namespace CursLab8.Controllers
                 .Where(item => item.CategoryId == id)
                 .OrderBy(item => item.Date)
                 .Skip(offset)
-                .Take(pageSize);
+                .Take(pageSize + 1);
 
             if (TempData.ContainsKey("message"))
             {
                 ViewBag.message = TempData["message"].ToString();
             }
-            ViewBag.Articles = articles;
+            ViewBag.Articles = articles.Take(pageSize);
+            ViewBag.CategoryId = id;
+            ViewBag.OffsetNext = offset + pageSize;
+            ViewBag.OffsetPrev = offset - pageSize;
+            ViewBag.HasNextPage = articles.Count() > pageSize ? true : false;
 
             return View();
         }

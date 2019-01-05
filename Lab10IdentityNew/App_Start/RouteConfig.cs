@@ -14,6 +14,13 @@ namespace Lab10IdentityNew
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Custom",
+                url: "Article/ArticlesByCategory/{id}/{offset}/{pageSize}",
+                defaults: new { controller = "Article", action = "ArticlesByCategory", id = UrlParameter.Optional,
+                    offset = UrlParameter.Optional, pageSize = UrlParameter.Optional}
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
