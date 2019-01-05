@@ -17,6 +17,16 @@
 
 }
 
+@if (ViewBag.OffsetPrev >= 0)
+{
+    <a class="btn btn-sm btn-success" href="/Article/ArticlesByCategory/@(ViewBag.CategoryId)/@(ViewBag.OffsetPrev)/5">Prev</a>
+}
+@if (ViewBag.HasNextPage)
+{
+    <a class="btn btn-sm btn-success" href="/Article/ArticlesByCategory/@(ViewBag.CategoryId)/@(ViewBag.OffsetNext)/5">Next</a>
+}
+</br>
+</br>
 <a class="btn btn-sm btn-success" href="/Article/New">Adauga un articol</a>
 <br />
 
