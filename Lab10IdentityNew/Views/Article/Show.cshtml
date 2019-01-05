@@ -12,13 +12,33 @@
 
 @foreach (Lab10IdentityNew.Models.Message message in ViewBag.Messages)
 {
-    @Html.Partial("CommentInfo", message);
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <span class="label label-success">@message.Date</span>
+            <i class="glyphicon glyphicon-user"></i> <i>comment facut de</i> <strong>
+                @message.User.UserName
+            </strong>
+            <br />
+            <i class="glyphicon glyphicon-globe"></i>@message.Comment
+            <br />
+            @if (ViewBag.afisareButoane2 == true || ViewBag.utilizatorCurent == message.UserId)
+            {
+                <a class="btn btn-sm btn-success" href="/Message/Edit/message.Id">Editare comentariu</a>
+                <form method="post" action="/Message/Delete/message.Id">
+                    @Html.HttpMethodOverride(HttpVerbs.Delete)
+                    <button class="btn btn-sm btn-danger" type="submit">Sterge comentariu</button>
+                </form>
+            }
+        </div>
+    </div>
+    <br />
+    @*@Html.Partial("CommentInfo", message);*@
 }
 <a class="btn btn-sm btn-info" href="/Message/New/@Model.Id">
     Adauga comentariu
 </a>
 
-@if (ViewBag.afisareButoane == true && Model.UserId == ViewBag.utilizatorCurent || ViewBag.esteAdmin)
+@if (ViewBag.afisareButoane1 == true && Model.UserId == ViewBag.utilizatorCurent || ViewBag.esteAdmin)
 {
     <a class="btn btn-sm btn-info" href="/Article/Edit/@Model.Id">
         Modifica articol

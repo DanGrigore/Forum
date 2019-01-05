@@ -48,6 +48,16 @@ namespace Lab10IdentityNew
                 var role = new IdentityRole();
                 role.Name = "Moderator";
                 roleManager.Create(role);
+
+                var user = new ApplicationUser();
+                user.UserName = "moderator@test.com";
+                user.Email = "moderator@test.com";
+
+                var moderatorCreated = UserManager.Create(user, "Moderator1!");
+                if (moderatorCreated.Succeeded)
+                {
+                    UserManager.AddToRole(user.Id, "Moderator");
+                }
             }
 
             if (!roleManager.RoleExists("User"))
