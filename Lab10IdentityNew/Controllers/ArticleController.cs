@@ -194,7 +194,12 @@ namespace CursLab8.Controllers
                             db.SaveChanges();
                             TempData["message"] = "Articolul a fost modificat!";
                         }
-                        return RedirectToAction("Index");
+                        return RedirectToRoute(new
+                        {
+                            controller = "Article",
+                            action = "Show",
+                            id = article.Id
+                        });
                     }
                     else
                     {
