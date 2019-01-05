@@ -1,12 +1,29 @@
 ﻿<div class="panel panel-default">
     <div class="panel-heading">@Model.Title</div>
     <div class="panel-body">
-        Continut articol: <strong>@Model.Content</strong>
-        <br />
+
         <span class="label label-success">@Model.Date</span>
         <br />
         <i class="glyphicon glyphicon-globe"></i> @Model.Category.CategoryName
-        
+        <br />
+        <i class="glyphicon glyphicon-user"></i> <i>Author: </i> <strong> @Model.User.UserName </strong>
+        <br />
+        @if (ViewBag.afisareButoane1 == true && Model.UserId == ViewBag.utilizatorCurent || ViewBag.esteAdmin)
+        {
+            <a class="btn btn-sm btn-info" href="/Article/Edit/@Model.Id">
+                Modifica articol
+            </a>
+
+            <form method="post" action="/Article/Delete/@Model.Id">
+                @Html.HttpMethodOverride(HttpVerbs.Delete)
+                <button class="btn btn-sm btn-danger" type="submit">Sterge articol</button>
+            </form>
+        }
+        <hr />
+        <strong>@Model.Content</strong>
+        <br />
+
     </div>
+    
 </div>
 <br />

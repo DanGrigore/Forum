@@ -74,9 +74,10 @@ namespace CursLab8.Controllers
         }
 
         [Authorize(Roles = "User,Moderator,Administrator")]
-        public ActionResult New()
+        public ActionResult New(int id)
         {
             Article article = new Article();
+            article.CategoryId = id;
             // preluam lista de categorii din metoda GetAllCategories()
             article.Categories = GetAllCategories();
             // Preluam ID-ul utilizatorului curent
@@ -118,7 +119,14 @@ namespace CursLab8.Controllers
                     db.Articles.Add(article);
                     db.SaveChanges();
                     TempData["message"] = "Articolul a fost adaugat!";
-                    return RedirectToAction("Index");
+                    return RedirectToRoute(new
+                    {
+                        controller = "Article",
+                        action = "ArticlesByCategory",
+                        id = article.CategoryId,
+                        offset = 0,
+                        pageSize = 5
+                    });
                 }
                 else
                 {
@@ -172,7 +180,12 @@ namespace CursLab8.Controllers
                             db.SaveChanges();
                             TempData["message"] = "Articolul a fost modificat!";
                         }
-                        return RedirectToAction("Index");
+                        return RedirectToRoute(new
+                        {
+                            controller = "Article",
+                            action = "Show",
+                            id = article.Id
+                        });
                     }
                     else
                     {
