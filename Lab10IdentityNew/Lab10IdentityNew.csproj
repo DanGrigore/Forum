@@ -290,6 +290,7 @@
     <Content Include="Views\Shared\CommentInfo.cshtml" />
     <Content Include="Views\Message\New.cshtml" />
     <Content Include="Views\Message\Edit.cshtml" />
+    <Content Include="Views\Article\ArticlesByTitle.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

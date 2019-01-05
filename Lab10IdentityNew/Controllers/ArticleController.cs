@@ -27,9 +27,16 @@ namespace CursLab8.Controllers
             return View();
         }
 
-        public ActionResult ArticlesByCategory(int id)
+        public ActionResult ArticlesByCategory(int id, int offset = 0, int pageSize = 10)
         {
-            var articles = db.Articles.Include("Category").Include("User").Where(item => item.CategoryId == id);
+            var articles = db.Articles
+                .Include("Category")
+                .Include("User")
+                .Where(item => item.CategoryId == id)
+                .OrderBy(item => item.Date)
+                .Skip(offset)
+                .Take(pageSize);
+
             if (TempData.ContainsKey("message"))
             {
                 ViewBag.message = TempData["message"].ToString();
@@ -38,7 +45,21 @@ namespace CursLab8.Controllers
 
             return View();
         }
-        
+
+        public ActionResult ArticlesByTitle(string title)
+        {
+            var articles = db.Articles
+                .Where(item => item.Title == title);
+
+            if (TempData.ContainsKey("message"))
+            {
+                ViewBag.message = TempData["message"].ToString();
+            }
+            ViewBag.Articles = articles;
+
+            return View();
+        }
+
         public ActionResult Show(int id)
         {
             var messages = db.Messages.Include("Article").Include("User").Where(item => item.ArticleId == id);
@@ -57,7 +78,7 @@ namespace CursLab8.Controllers
 
         }
 
-        [Authorize(Roles = "Moderator,Administrator")]
+        [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult New()
         {
             Article article = new Article();
