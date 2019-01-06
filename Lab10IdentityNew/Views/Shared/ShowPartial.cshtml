@@ -8,15 +8,15 @@
         <br />
         <i class="glyphicon glyphicon-user"></i> <i>Author: </i> <strong> @Model.User.UserName </strong>
         <br />
-        @if (ViewBag.afisareButoane1 == true && Model.UserId == ViewBag.utilizatorCurent || ViewBag.esteAdmin)
+        @if (ViewBag.afisareButoane1 == true && (Model.UserId == ViewBag.utilizatorCurent || ViewBag.esteAdmin || User.IsInRole("Moderator")))
         {
             <a class="btn btn-sm btn-info" href="/Article/Edit/@Model.Id">
-                Modifica articol
+                Edit this article
             </a>
 
             <form method="post" action="/Article/Delete/@Model.Id">
                 @Html.HttpMethodOverride(HttpVerbs.Delete)
-                <button class="btn btn-sm btn-danger" type="submit">Sterge articol</button>
+                <button class="btn btn-sm btn-danger" type="submit">Delete this article</button>
             </form>
         }
         <hr />

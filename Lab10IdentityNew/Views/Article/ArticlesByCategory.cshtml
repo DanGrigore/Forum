@@ -1,9 +1,11 @@
 ﻿
 @{
-    ViewBag.Title = "Afisare articole";
+    ViewBag.Title = "Topics";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>@ViewBag.Title in @ViewBag.CategoryName</h2>
+<a class="btn btn-sm btn-primary" href="/Article/New/@ViewBag.CategoryId">Add new topic</a>
+<br /><br />
 
 @if (TempData.ContainsKey("message"))
 {
@@ -25,9 +27,7 @@
 {
     <a class="btn btn-sm btn-success" href="/Article/ArticlesByCategory/@(ViewBag.CategoryId)/@(ViewBag.OffsetNext)/5">Next</a>
 }
-</br>
-</br>
-<a class="btn btn-sm btn-success" href="/Article/New/@ViewBag.CategoryId">Adauga un articol</a>
+</br></br>
 <br />
 
 

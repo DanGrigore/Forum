@@ -1,41 +1,49 @@
 ﻿@model CursLab8.Models.Article
 
 @{
-    ViewBag.Titlu = "Afisare articol";
+    ViewBag.Titlu = "Article";
 }
 
-<h2>@ViewBag.Titlu</h2>
+@*<h2>@ViewBag.Titlu</h2>*@
 
 <br />
 
 @Html.Partial("ShowPartial")
 
-
-@foreach (Lab10IdentityNew.Models.Message message in ViewBag.Messages)
-{
-    <div class="panel panel-default">
+<div class="panel panel-default">
+    @{var index = 0;}
+    @foreach (Lab10IdentityNew.Models.Message message in ViewBag.Messages)
+    {
+        index++;
         <div class="panel-body">
-            <span class="label label-success">@message.Date</span>
-            <i class="glyphicon glyphicon-user"></i> <i>comment facut de</i> <strong>
+            <span class="label label-success pull-right">@message.Date</span>
+            <i class="glyphicon glyphicon-user"></i> <i>reply made by: </i> <strong>
                 @message.User.UserName
             </strong>
-            <br />
-            <i class="glyphicon glyphicon-globe"></i>@message.Comment
+            <br /><br />
+             @message.Comment
             <br />
             @if (ViewBag.afisareButoane2 == true || ViewBag.utilizatorCurent == message.UserId)
-            {
-                <a class="btn btn-sm btn-success" href="/Message/Edit/message.Id">Editare comentariu</a>
-                <form method="post" action="/Message/Delete/message.Id">
-                    @Html.HttpMethodOverride(HttpVerbs.Delete)
-                    <button class="btn btn-sm btn-danger" type="submit">Sterge comentariu</button>
-                </form>
+            {<br />
+                <div class="btn-group">
+                    <a class="btn btn-sm btn-success" href="/Message/Edit/@message.Id">Edit</a>
+                    <form method="post" class="form-inline" action="/Message/Delete/@message.Id">
+                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                        <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+                    </form>
+                </div>
+                <br />
             }
+            @if (index != ViewBag.MessagesNo)
+            {<hr />}
         </div>
-    </div>
-    <br />
-    @*@Html.Partial("CommentInfo", message);*@
-}
-<a class="btn btn-sm btn-info" href="/Message/New/@Model.Id">
+
+        @*@Html.Partial("CommentInfo", message);*@
+    }
+
+</div>
+
+<a class="btn btn-sm btn-info pull-center" href="/Message/New/@Model.Id">
     Adauga comentariu
 </a>
 

@@ -1,15 +1,20 @@
-﻿<div class="panel panel-default">
-    <div class="panel-heading">@Model.Title</div>
+﻿<div class="panel panel-info">
+    <div class="panel-heading">
+    <span class="text-capitalize"><strong>@Model.Title</strong></span>
+    <span class="label label-success pull-right">@Model.Date</span>
+    </div>
+
     <div class="panel-body">
-        <span class="label label-success">@Model.Date</span>
+        @if (User.IsInRole("Administrator"))
+        {
+        <i class="glyphicon glyphicon-globe"></i> <i>Category:</i> @Model.Category.CategoryName
         <br />
-        <i class="glyphicon glyphicon-globe"></i> @Model.Category.CategoryName
-        <br />
+        }
         <i class="glyphicon glyphicon-user"></i> <i>Created By: </i> <strong> @Model.User.UserName
 </strong>
     </div>
     <div class="panel-footer">
-        <a class="btn btn-sm btn-success" href="/Article/Show/@Model.Id">Afisare articol</a>
+        <a class="btn btn-sm btn-success" href="/Article/Show/@Model.Id">Show Topic</a>
     </div>
 </div>
 <br />

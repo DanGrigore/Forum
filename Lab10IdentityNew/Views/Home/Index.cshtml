@@ -10,12 +10,17 @@
 <div class="row">
     <h2>Categories</h2>
 </div>
+<br />
 
 @foreach (var category in ViewBag.Categories)
 {
-    <p>@category.CategoryName</p>
-    <a class="btn btn-sm btn-success" href="/Article/ArticlesByCategory/@category.CategoryId/0/5">Afisare Articole</a>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <p class="text-uppercase"><strong>@category.CategoryName</strong></p>
+            <a class="btn btn-sm btn-success" href="/Article/ArticlesByCategory/@category.CategoryId/0/5">Show topics in this category</a>
+        </li>
+    </ul>
 
-    <hr />
 }
-<br /> <br />
+<br />
+<br />

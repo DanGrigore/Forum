@@ -42,7 +42,7 @@ namespace Lab10IdentityNew.Controllers
             {
                 db.Messages.Add(message);
                 db.SaveChanges();
-                TempData["message"] = "Comentariu adaugat!";
+                TempData["message"] = "New comment added successfully";
                 return RedirectToRoute(new
                 {
                     controller = "Article",
@@ -69,7 +69,7 @@ namespace Lab10IdentityNew.Controllers
             }
             else
             {
-                TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui articol care nu va apartine!";
+                TempData["message"] = "You don't have the rights to do that!";
                 return ReturnToShow(message.ArticleId);
             }
         }
@@ -93,7 +93,7 @@ namespace Lab10IdentityNew.Controllers
                             message.Comment = requestMessage.Comment;
                             message.Date = requestMessage.Date;
                             db.SaveChanges();
-                            TempData["message"] = "Commentul a fost modificat!";
+                            TempData["message"] = "Comment modified successfully!";
                         }
                         return RedirectToRoute(new
                         {
@@ -104,7 +104,7 @@ namespace Lab10IdentityNew.Controllers
                     }
                     else
                     {
-                        TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui comment care nu va apartine!";
+                        TempData["message"] = "You don't have the rights to do that!";
                         return ReturnToShow(message.ArticleId);
                     }
 
@@ -122,7 +122,7 @@ namespace Lab10IdentityNew.Controllers
         }
 
         [HttpDelete]
-        [Authorize(Roles = "Moderator,Administrator")]
+        [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult Delete(int id)
         {
 
@@ -133,12 +133,12 @@ namespace Lab10IdentityNew.Controllers
             {
                 db.Messages.Remove(message);
                 db.SaveChanges();
-                TempData["message"] = "Comentariul a fost sters!";
+                TempData["message"] = "Comment deleted successfully!";
                 return ReturnToShow(message.ArticleId);
             }
             else
             {
-                TempData["message"] = "Nu aveti dreptul sa stergeti un comment care nu va apartine!";
+                TempData["message"] = "You don't have the rights to do that!";
                 return ReturnToShow(message.ArticleId);
             }
 

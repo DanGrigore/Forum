@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Lab10IdentityNew.Controllers
 {
-    [Authorize]
+  
     public class SearchController : Controller
     {
         private ApplicationDbContext db = ApplicationDbContext.Create();
@@ -16,9 +16,7 @@ namespace Lab10IdentityNew.Controllers
         // GET: Search
         public ActionResult ArticlesByTitle(Search search)
         {
-            var articles = db.Articles
-                .Where(item => item.Title == search.Title)
-                .ToList();
+            var articles = db.Articles.Where(item => item.Title.ToLower().Contains(search.Title.ToLower())).ToList();
 
             if (TempData.ContainsKey("message"))
             {

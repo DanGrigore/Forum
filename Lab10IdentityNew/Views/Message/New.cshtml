@@ -1,7 +1,7 @@
 ﻿@model Lab10IdentityNew.Models.Message
 
 @{
-    ViewBag.Title = "Adaugare comentariu";
+    ViewBag.Title = "Add a comment";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -10,10 +10,10 @@
     @Html.HiddenFor(m => m.UserId)
     @Html.HiddenFor(m => m.ArticleId)
 
-    @Html.Label("Comment", "Comentariu:")
+    @Html.Label("Comment", "Your comment:")
     <br />
-    @Html.TextBox("Comment", null, new { @class = "form-control" })
+    @Html.TextArea("Comment", null, new { @class = "form-control" })
     <br /><br />
     @Html.Hidden("Date", DateTime.Now, new { @class = "form-control" })
-    <button class="btn btn-sm btn-success" type="submit">Adauga comentariu</button>
+    <button class="btn btn-sm btn-success" type="submit">Submit</button>
 </form>

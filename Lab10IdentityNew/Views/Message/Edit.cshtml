@@ -1,7 +1,7 @@
 ﻿@model Lab10IdentityNew.Models.Message
 
 @{
-    ViewBag.Titlu = "Editare Comentariu";
+    ViewBag.Titlu = "Edit your comment";
 }
 
 <h2>@ViewBag.Titlu</h2>
@@ -11,12 +11,12 @@
     @Html.HiddenFor(m => m.Id)
  
     <br /><br />
-    @Html.Label("Content", "Continut Articol")
+    @Html.Label("Content", "Your new comment")
     <br />
-    @Html.EditorFor(m => m.Comment)
-    @Html.ValidationMessageFor(model => model.Comment, "Comment-ul este obligatoriu", new { @class = "text-danger " })
+    @Html.TextAreaFor(m => m.Comment)
+    @Html.ValidationMessageFor(model => model.Comment, "Comment is mandatory", new { @class = "text-danger " })
     <br /><br />
     @Html.HiddenFor(m => m.Date)
-    <button class="btn btn-sm btn-success" type="submit">Modifica comment</button>
+    <button class="btn btn-sm btn-success" type="submit">Submit</button>
 </form>
 
