@@ -200,6 +200,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -209,6 +210,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\Search.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -291,6 +293,7 @@
     <Content Include="Views\Message\New.cshtml" />
     <Content Include="Views\Message\Edit.cshtml" />
     <Content Include="Views\Article\ArticlesByTitle.cshtml" />
+    <Content Include="Views\Search\ArticlesByTitle.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
