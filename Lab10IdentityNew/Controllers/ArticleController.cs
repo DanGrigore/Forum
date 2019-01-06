@@ -50,20 +50,6 @@ namespace CursLab8.Controllers
             return View();
         }
 
-        public ActionResult ArticlesByTitle(string title)
-        {
-            var articles = db.Articles
-                .Where(item => item.Title == title);
-
-            if (TempData.ContainsKey("message"))
-            {
-                ViewBag.message = TempData["message"].ToString();
-            }
-            ViewBag.Articles = articles;
-
-            return View();
-        }
-
         public ActionResult Show(int id)
         {
             var messages = db.Messages.Include("Article").Include("User").Where(item => item.ArticleId == id);

@@ -16,8 +16,23 @@ namespace Lab10IdentityNew
             routes.MapRoute(
                 name: "Custom",
                 url: "Article/ArticlesByCategory/{id}/{offset}/{pageSize}",
-                defaults: new { controller = "Article", action = "ArticlesByCategory", id = UrlParameter.Optional,
-                    offset = UrlParameter.Optional, pageSize = UrlParameter.Optional}
+                defaults: new {
+                    controller = "Article",
+                    action = "ArticlesByCategory",
+                    id = UrlParameter.Optional,
+                    offset = UrlParameter.Optional,
+                    pageSize = UrlParameter.Optional}
+            );
+
+            routes.MapRoute(
+                name: "Custom2",
+                url: "Article/ArticlesByTitle/{title}",
+                defaults: new
+                {
+                    controller = "Article",
+                    action = "ArticlesByTitle",
+                    title = UrlParameter.Optional
+                }
             );
 
             routes.MapRoute(

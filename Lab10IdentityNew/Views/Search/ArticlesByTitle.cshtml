@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Search Articles";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (TempData.ContainsKey("message"))
+{
+    <h3 class="alert alert-info" role="alert">@ViewBag.message</h3>
+}
+
+@model CursLab8.Models.Search
+
+@using (Html.BeginForm("ArticlesByTitle", "Search", FormMethod.Get))
+{
+    @Html.TextBoxFor(model => model.Title)
+    <button class="btn btn-sm btn-success" type="submit">Search</button>
+
+}
+
+ </br>
+@foreach (CursLab8.Models.Article article in ViewBag.Articles)
+{
+    @Html.Partial("ArticleInfo", article);
+}
+
+<br />
