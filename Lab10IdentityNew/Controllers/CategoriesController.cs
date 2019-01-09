@@ -53,7 +53,7 @@ namespace CursLab8.Controllers
             {
                 db.Categories.Add(category);
                 db.SaveChanges();
-                TempData["message"] = "Categoria a fost adaugata!";
+                TempData["message"] = "New category added!";
                 return RedirectToAction("Index");
             }
             catch (Exception e)
@@ -83,7 +83,7 @@ namespace CursLab8.Controllers
                     {
                         category.CategoryName = requestCategory.CategoryName;
                         db.SaveChanges();
-                        TempData["message"] = "Categoria a fost modificata!";
+                        TempData["message"] = "Category modified successfully!";
                     }
                     return RedirectToAction("Index");
                 }
@@ -106,7 +106,7 @@ namespace CursLab8.Controllers
             Category category = db.Categories.Find(id);
             db.Categories.Remove(category);
             db.SaveChanges();
-            TempData["message"] = "Categoria a fost stearsa!";
+            TempData["message"] = "Category deleted successfully!";
             return RedirectToAction("Index");
         }
     }

@@ -36,11 +36,12 @@ namespace CursLab8.Controllers
                 .OrderBy(item => item.Date)
                 .Skip(offset)
                 .Take(pageSize + 1);
-
+            var categoryName = db.Categories.Where(item => item.CategoryId == id).First();
             if (TempData.ContainsKey("message"))
             {
                 ViewBag.message = TempData["message"].ToString();
             }
+            ViewBag.CategoryName = categoryName.CategoryName;
             ViewBag.Articles = articles.Take(pageSize);
             ViewBag.CategoryId = id;
             ViewBag.OffsetNext = offset + pageSize;
@@ -57,6 +58,7 @@ namespace CursLab8.Controllers
             ViewBag.Article = article;
             ViewBag.Category = article.Category;
             ViewBag.Messages = messages;
+            ViewBag.MessagesNo = messages.Count();
             ViewBag.afisareButoane1 = false;
             ViewBag.afisareButoane2 = false;
             if (User.IsInRole("Moderator") || User.IsInRole("Administrator") || article.UserId == User.Identity.GetUserId())
@@ -74,7 +76,7 @@ namespace CursLab8.Controllers
         }
 
         [Authorize(Roles = "User,Moderator,Administrator")]
-        public ActionResult New(int id)
+        public ActionResult New(int id = 1)
         {
             Article article = new Article();
             article.CategoryId = id;
@@ -118,7 +120,7 @@ namespace CursLab8.Controllers
                 {
                     db.Articles.Add(article);
                     db.SaveChanges();
-                    TempData["message"] = "Articolul a fost adaugat!";
+                    TempData["message"] = "New topic added!";
                     return RedirectToRoute(new
                     {
                         controller = "Article",
@@ -139,7 +141,7 @@ namespace CursLab8.Controllers
             }
         }
 
-        [Authorize(Roles = "User,Administrator")]
+        [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult Edit(int id)
         {
 
@@ -147,20 +149,20 @@ namespace CursLab8.Controllers
             ViewBag.Article = article;
             article.Categories = GetAllCategories();
 
-            if (article.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator"))
+            if (article.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator") || User.IsInRole("Moderator"))
             {
                 return View(article);
             }
             else
             {
-                TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui articol care nu va apartine!";
+                TempData["message"] = "You don't have the rights to do that!";
                 return RedirectToAction("Index");
             }
         }
 
 
         [HttpPut]
-        [Authorize(Roles = "User,Administrator")]
+        [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult Edit(int id, Article requestArticle)
         {
             try
@@ -169,7 +171,7 @@ namespace CursLab8.Controllers
                 {
                     Article article = db.Articles.Find(id);
 
-                    if (article.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator"))
+                    if (article.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator") || User.IsInRole("Moderator"))
                     {
                         if (TryUpdateModel(article))
                         {
@@ -178,7 +180,7 @@ namespace CursLab8.Controllers
                             article.Date = requestArticle.Date;
                             article.CategoryId = requestArticle.CategoryId;
                             db.SaveChanges();
-                            TempData["message"] = "Articolul a fost modificat!";
+                            TempData["message"] = "Topic modified successfully!";
                         }
                         return RedirectToRoute(new
                         {
@@ -189,7 +191,7 @@ namespace CursLab8.Controllers
                     }
                     else
                     {
-                        TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui articol care nu va apartine!";
+                        TempData["message"] = "You don't have the rights to do that!";
                         return RedirectToAction("Index");
                     }
 
@@ -208,22 +210,22 @@ namespace CursLab8.Controllers
         }
 
         [HttpDelete]
-        [Authorize(Roles = "User,Administrator")]
+        [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult Delete(int id)
         {
 
             Article article = db.Articles.Find(id);
 
-            if (article.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator"))
+            if (article.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator") || User.IsInRole("Moderator"))
             {
                 db.Articles.Remove(article);
                 db.SaveChanges();
-                TempData["message"] = "Articolul a fost sters!";
+                TempData["message"] = "Topic deleted successfully!";
                 return RedirectToAction("Index");
             }
             else
             {
-                TempData["message"] = "Nu aveti dreptul sa stergeti un articol care nu va apartine!";
+                TempData["message"] = "You don't have the rights to do that!";
                 return RedirectToAction("Index");
             }
 

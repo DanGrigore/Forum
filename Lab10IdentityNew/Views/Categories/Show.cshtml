@@ -2,23 +2,21 @@
 
 
 @{
-    ViewBag.Title = "Afisare categorie";
+    ViewBag.Title = "Category Panel";
 }
 
 <h2>@ViewBag.Title</h2>
 <h1>@Model.CategoryName</h1>
 <br />
 
-<a class="btn btn-sm btn-info" href="/Categories/Edit/@Model.CategoryId">Modifica categoria</a>
+<a class="btn btn-sm btn-info" href="/Categories/Edit/@Model.CategoryId">Edit</a>
 <br /><br />
 <form method="post" action="/Categories/Delete/@Model.CategoryId">
     @Html.HttpMethodOverride(HttpVerbs.Delete)
-    <button class="btn btn-sm btn-danger" type="submit">Sterge categoria</button>
+    <button class="btn btn-sm btn-danger" type="submit">Delete</button>
 </form>
 
 <hr />
-<a class="btn btn-sm btn-success" href="/Article/Index">Inapoi la articole</a>
-<br /><br />
-<a class="btn btn-sm btn-success" href="/Categories/Index">Inapoi la categorii</a>
+<a class="btn btn-sm btn-success" href="/Categories/Index">Back to Categories</a>
 <br />
 

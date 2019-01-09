@@ -1,0 +1,34 @@
+﻿@model Lab10IdentityNew.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "User manager";
+}
+
+<ol class="breadcrumb">
+    <li><h3>@ViewBag.Title</h3></li>
+</ol>
+
+<form method="post" action="/Users/Edit/@Model.Id">
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    @Html.HiddenFor(m => m.Id)
+    <br />
+    <i class="glyphicon glyphicon-user"></i>
+    @Html.Label("UserName", "Username: ", new { @class = "" })
+    <br />
+    @Html.EditorFor(m => m.UserName)
+    <br /><br />
+    <i class="glyphicon glyphicon-envelope"></i>
+    @Html.Label("Email", "User's email", new { @class = "" })
+    <br />
+    @Html.EditorFor(m => m.Email)
+    <br /><br />
+    <i class="glyphicon glyphicon-th-list"></i>
+    <label>Role: </label>
+    @Html.DropDownList("newRole", new SelectList(Model.AllRoles, "Value", "Text", (string)ViewBag.userRole), null, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-sm btn-success" type="submit">Save changes</button>
+</form>
+
+
+
+

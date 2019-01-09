@@ -1,28 +1,29 @@
 ﻿@model CursLab8.Models.Article
 
 @{
-    ViewBag.Titlu = "Editare Articol";
+    ViewBag.Title = "Edit your Article";
 }
+
+<h2> @ViewBag.Title</h2>
 <form method="post" action="/Article/Edit/@Model.Id">
     @Html.HttpMethodOverride(HttpVerbs.Put)
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     @Html.HiddenFor(m => m.Id)
     <br />
-    @Html.Label("Title", "Titlu Articol")
+    @Html.Label("Title", "New Title")
     <br />
     @Html.EditorFor(m => m.Title)
-    @Html.ValidationMessageFor(model => model.Title, "Titlul este obligatoriu", new { @class = "text-danger " })
+    @Html.ValidationMessageFor(model => model.Title, "Title is mandatory!", new { @class = "text-danger " })
     <br /><br />
-    @Html.Label("Content", "Continut Articol")
+    @Html.Label("Content", "Your Content")
     <br />
-    @Html.EditorFor(m => m.Content)
-    @Html.ValidationMessageFor(model => model.Content, "Continutul este obligatoriu", new { @class = "text-danger " })
+    @Html.TextAreaFor(m => m.Content)
+    @Html.ValidationMessageFor(model => model.Content, "Content is mandatory!", new { @class = "text-danger " })
     <br /><br />
     @Html.HiddenFor(m => m.Date)
+    <label>Category</label>
+    @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categories, "Value", "Text"), "Select category", new { @class = "form-control" })
     <br />
-    <label>Selectati categoria</label>
-    @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categories, "Value", "Text"), "Selectati categoria", new { @class = "form-control" })
-    <br />
-    <button class="btn btn-sm btn-success" type="submit">Modifica articol</button>
+    <button class="btn btn-sm btn-success" type="submit">Submit</button>
 </form>
 

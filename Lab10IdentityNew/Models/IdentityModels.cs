@@ -1,6 +1,8 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using CursLab8.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -18,7 +20,7 @@ namespace Lab10IdentityNew.Models
             return userIdentity;
         }
 
-    
+        public IEnumerable<SelectListItem> AllRoles { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
